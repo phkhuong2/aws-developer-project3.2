@@ -34,5 +34,5 @@ spec:
           name: udagram-aws
       volumes:
       - name: udagram-aws
-        configMap:
-          name: udagram-aws
+        secret:
+          secretName: udagram-aws
