@@ -1,0 +1,29 @@
+# Workflow to ensure whenever a Github PR is submitted, 
+# a JIRA ticket gets created automatically. 
+name: Node.js CI
+
+# Controls when the action will run. 
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - run: docker-compose -f docker-compose-build.yaml build --parallel
+    - run: docker tag udagram-frontend:local khuongph/udagram-frontend:v2
+    - run: docker tag udagram-api-user khuongph/udagram-api-user:v1
+    - run: docker tag udagram-api-feed khuongph/udagram-api-feed:v1
+    - run: docker tag reverseproxy khuongph/reverseproxy:v1
+    - run: echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin 
+    - run: docker push khuongph/udagram-frontend:v2
+    - run: docker push khuongph/udagram-api-user:v1
+    - run: docker push khuongph/udagram-api-feed:v1
+    - run: docker push khuongph/reverseproxy:v1
+
+
