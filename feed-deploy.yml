@@ -31,8 +31,8 @@ spec:
             name: udagramdb-env
         volumeMounts:
         - mountPath: "/root/.aws/"
-          name: udagram-aws
+          name: aws-secret
       volumes:
-      - name: udagram-aws
+      - name: aws-secret
         secret:
-          secretName: udagram-aws
+          secretName: aws-secret
