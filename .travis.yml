@@ -18,14 +18,14 @@ script:
   - docker-compose -f docker-compose-build.yaml build --parallel
 
   ## Tagging
-  - docker tag udagram-api-feed loctrinh17/udagram-api-feed:v1
-  - docker tag udagram-api-user loctrinh17/udagram-api-user:v1
-  - docker tag udagram-frontend:local loctrinh17/udagram-frontend:v2
-  - docker tag reverseproxy loctrinh17/reverseproxy:v1
+  - docker tag udagram-api-feed khuongph/udagram-api-feed:v1
+  - docker tag udagram-api-user khuongph/udagram-api-user:v1
+  - docker tag udagram-frontend:local khuongph/udagram-frontend:v2
+  - docker tag reverseproxy khuongph/reverseproxy:v1
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push loctrinh17/udagram-api-feed:v1
-  - docker push loctrinh17/udagram-api-user:v1
-  - docker push loctrinh17/udagram-frontend:v2
-  - docker push loctrinh17/reverseproxy:v1
+  - docker push khuongph/udagram-api-feed:v1
+  - docker push khuongph/udagram-api-user:v1
+  - docker push khuongph/udagram-frontend:v2
+  - docker push khuongph/reverseproxy:v1
